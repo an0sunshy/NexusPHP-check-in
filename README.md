@@ -19,3 +19,15 @@ eg. If the login page of the website is https://abc.com/login.php, you only need
 ```bash
 python3 sign.py
 ```
+
+## Run regularly
+Grant execute privilege to the script(you need to edit the script Shebang if your python3 executable is not /usr/bin/python3)
+```bash
+chmod +x sign.py
+```
+
+Create a cron job
+```bash
+crontab -e
+* * * * 0 sign.py
+```
