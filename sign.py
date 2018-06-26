@@ -63,8 +63,9 @@ def login(website):
             '/takelogin.php',
             headers=HEADER,
             data=payload)
-        if index_page.ok and index_page.text.__contains__('欢迎回来'):
-            logging.info('Logged In %s successfully!' % website.website)
+        if index_page.ok:
+            if '欢迎回来' in index_page.text or 'Welcome' in index_page.text or '歡迎回來' in index_page.text:
+                logging.info('Logged In %s successfully!' % website.website)
         else:
             # time.sleep(60)
             logging.info('Retry in 60s')
@@ -73,7 +74,8 @@ def login(website):
 
 if __name__ == '__main__':
     if not os.path.exists('dict'):
-        logging.info('No generated dictionaries found!\nGenerating dictionaries...')
+        logging.info(
+            'No generated dictionaries found!\nGenerating dictionaries...')
         import gen_hash
         gen_hash.gen_hash()
         logging.info('Dictionaries Generated')
